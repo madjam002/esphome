@@ -310,7 +310,7 @@ def run_ota_impl_(remote_host, remote_port, password, filename):
             raise OTAError(err) from err
         _LOGGER.info(" -> %s", ip)
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock = socket.socket(socket.getaddrinfo(ip, None)[0][0], socket.SOCK_STREAM)
     sock.settimeout(10.0)
     try:
         sock.connect((ip, remote_port))

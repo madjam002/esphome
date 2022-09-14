@@ -96,7 +96,13 @@ def test_is_ip_address__invalid(host):
 
 
 @given(value=ip_addresses(v=4).map(str))
-def test_is_ip_address__valid(value):
+def test_is_ip_address__valid_4(value):
+    actual = helpers.is_ip_address(value)
+
+    assert actual is True
+
+@given(value=ip_addresses(v=6).map(str))
+def test_is_ip_address__valid_6(value):
     actual = helpers.is_ip_address(value)
 
     assert actual is True

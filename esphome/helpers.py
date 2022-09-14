@@ -1,6 +1,7 @@
 import codecs
 from contextlib import suppress
 
+import ipaddress
 import logging
 import os
 from pathlib import Path
@@ -86,12 +87,8 @@ def mkdir_p(path):
 
 
 def is_ip_address(host):
-    parts = host.split(".")
-    if len(parts) != 4:
-        return False
     try:
-        for p in parts:
-            int(p)
+        ip = ipaddress.ip_address(host)
         return True
     except ValueError:
         return False
