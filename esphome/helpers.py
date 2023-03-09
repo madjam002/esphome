@@ -133,7 +133,7 @@ def resolve_ip_address(host):
 
     try:
         host_url = host if (urlparse(host).scheme != "") else "http://" + host
-        return socket.gethostbyname(urlparse(host_url).hostname)
+        return socket.getaddrinfo(urlparse(host_url).hostname, None)[0][4][0]
     except OSError as err:
         errs.append(str(err))
         raise EsphomeError(f"Error resolving IP address: {', '.join(errs)}") from err
